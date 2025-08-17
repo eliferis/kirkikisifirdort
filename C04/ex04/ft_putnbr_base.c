@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: apuchill <apuchill@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/06 16:19:03 by apuchill          #+#    #+#             */
-/*   Updated: 2019/12/06 22:29:32 by apuchill         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include <unistd.h>
 
@@ -24,20 +13,20 @@ void	ft_putnbr_base_rec(int nbr, char *base, int size)
 	}
 	else
 		n = nbr;
-	if (n >= (unsigned int)size)
+	if (n >= (unsigned int)size) //eger baseden buyukse bolerek devam et
 		ft_putnbr_base_rec(n / size, base, size);
-	a = base[n % size];
-	write(1, &a, 1);
+	a = base[n % size]; //kalan degeri karakter olarak bul
+	write(1, &a, 1); 
 }
 
-int		ft_ver_bas(char *base)
+int		ft_ver_bas(char *base) //bu fonksiyon base gecerli mi diye kontrol eder
 {
 	int i;
 
 	i = 0;
 	while (base[i] != '\0')
 	{
-		if (base[i] == '+' || base[i] == '-' || base[i] == base[i + 1])
+		if (base[i] == '+' || base[i] == '-' || base[i] == base[i + 1]) //bosluk, arti eksi veya ayni karakterden iki kez varsa gecersiz
 			return (0);
 		i++;
 	}
@@ -51,9 +40,9 @@ void	ft_putnbr_base(int nbr, char *base)
 	int s;
 
 	s = 0;
-	if (ft_ver_bas(base) == 1)
+	if (ft_ver_bas(base) == 1) //base gecerliyse
 	{
-		while (base[s] != '\0')
+		while (base[s] != '\0') //base uzunlugu hesapla
 			s++;
 		ft_putnbr_base_rec(nbr, base, s);
 	}
